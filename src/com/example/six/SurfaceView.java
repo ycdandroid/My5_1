@@ -62,15 +62,18 @@ public class SurfaceView extends GLSurfaceView {
 		public void onSurfaceChanged(GL10 gl, int width, int height) {
 			GLES20.glViewport(0, 0, width, height);
 			float radio = (float)width/height;
-			MatrixState.setProjectOrtho(-radio, radio, -1, 1, 1, 10);
-			MatrixState.setCamera(0, 0, 3f, 0, 0, 0f, 0f, 1.0f, 0.0f);
+//			MatrixState.setProjectOrtho(-radio, radio, -1, 1, 1, 10);
+//			MatrixState.setCamera(0, 0, 3f, 0, 0, 0f, 0f, 1.0f, 0.0f);
+			MatrixState.setProjectFrustum(-radio*0.4f, radio*0.4f, -1*0.4f, 1*0.4f, 1, 50);
+			MatrixState.setCamera(0, 0, 6f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 		}
 
 		@Override
 		public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 			GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 			for (int i = 0; i < ha.length; i++) {
-				ha[i] = new SixPoint(SurfaceView.this, 0.2f, 0.5f, -0.3f*i);
+//				ha[i] = new SixPoint(SurfaceView.this, 0.2f, 0.5f, -0.3f*i);
+				ha[i] = new SixPoint(SurfaceView.this, 0.4f, 1.0f, -1.0f*i);
 			}
 			GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 //			Log.e("onSurfaceCreate", "false");
